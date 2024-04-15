@@ -1,3 +1,4 @@
+from functions.bot.config import BotConfig
 from aws_cdk import Stack
 from constructs import Construct
 from infra.services import Services
@@ -11,3 +12,6 @@ class LambdaStack(Stack):
         super().__init__(scope, f"{context.stage}-{context.name}-Lambda-Stack", **kwargs)
 
         self.services = Services(self, context)
+
+        # Bot
+        BotConfig(self.services)
