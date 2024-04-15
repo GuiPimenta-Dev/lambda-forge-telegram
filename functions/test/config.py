@@ -1,5 +1,6 @@
 from infra.services import Services
 
+
 class TestConfig:
     def __init__(self, services: Services) -> None:
 
@@ -7,5 +8,4 @@ class TestConfig:
             name="Test",
             path="./functions/test",
             description="handles the test command",
-            
         )

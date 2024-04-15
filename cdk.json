@@ -64,6 +64,26 @@
                 "description": "Telegram webhook",
                 "method": "POST",
                 "endpoint": "/bot"
+            },
+            {
+                "name": "StartCommand",
+                "path": "./functions/start",
+                "description": "Handle /start command"
+            },
+            {
+                "name": "TestCommand",
+                "path": "./functions/test",
+                "description": "Handle /test command"
+            },
+            {
+                "name": "Start",
+                "path": "./functions/start",
+                "description": "handles the start command"
+            },
+            {
+                "name": "Test",
+                "path": "./functions/test",
+                "description": "handles the test command"
             }
         ]
     }

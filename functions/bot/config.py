@@ -14,7 +14,7 @@ class BotConfig:
         )
 
         services.api_gateway.create_endpoint("POST", "/bot", function, public=True)
-        
+
         start_function = services.aws_lambda.create_function(
             name="StartCommand",
             path="./functions/start",
@@ -26,28 +26,24 @@ class BotConfig:
             path="./functions/test",
             description="Handle /test command",
         )
-
+        
         stm = services.state_machine
-        start_task = stm.create_task("StartCommandTask", start_function)
-        test_task = stm.create_task("TestCommandTask", test_function)
-        
-        choice_state = sfn.Choice(self.scope, "CommandChoice")
 
-        # Adding conditions based on the command received
-        choice_state.when(sfn.Condition.string_equals("$.text", "/start"), start_task)
-        choice_state.when(sfn.Condition.string_equals("$.text", "/test"), test_task)
+        # Create tasks (Lambda functions already defined)
+        task1 = stm.create_task("HandleStart", start_function)
+        task2 = stm.create_task("HandleTest", test_function)
 
-        # Default to a fail state if an unknown command is received
-        fail_state = sfn.Fail(self.scope, "Fail", cause="Invalid Command")
-        choice_state.otherwise(fail_state)
+        # Define choice state
+        choice = stm.add_choice(
+            "CommandChoice", [
+                (stm.string_equals("$.command", "/start"), task1),
+                (stm.string_equals("$.command", "/test"), task2)
+            ]
+        )
 
-        # Your initial task should lead to the choice state
-        definition = task.next(choice_state)
-        
-        bot_stm = stm.create_state_machine("Bot-STM", definition)
-        
-        bot_stm.grant_start_execution(function)
-        
-        function.add_environment("STATE_MACHINE_ARN", bot_stm.state_machine_arn)
+        # Optionally add success and fail states
+        success = stm.add_success("ProcessComplete")
+        fail = stm.add_fail("InvalidCommand", "Invalid Command")
 
-        
+        # Finalize and build the state machine
+        state_machine = stm.finalize_and_build("MyStateMachine", choice)

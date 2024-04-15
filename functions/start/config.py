@@ -1,5 +1,6 @@
 from infra.services import Services
 
+
 class StartConfig:
     def __init__(self, services: Services) -> None:
 
@@ -7,5 +8,4 @@ class StartConfig:
             name="Start",
             path="./functions/start",
             description="handles the start command",
-            
         )
