@@ -7,15 +7,14 @@ class Layers:
 
         self.telegram_layer = _lambda.LayerVersion(
             scope,
-            id='TelegramLayer',
-            code=_lambda.Code.from_asset(Path.layer('layers/telegram')),
+            id="TelegramLayer",
+            code=_lambda.Code.from_asset(Path.layer("layers/telegram")),
             compatible_runtimes=[_lambda.Runtime.PYTHON_3_9],
-            description='',
-         )
-        
+            description="",
+        )
+
         self.requests_layer = _lambda.LayerVersion.from_layer_version_arn(
             scope,
             id="RequestsLayer",
             layer_version_arn="arn:aws:lambda:us-east-2:770693421928:layer:Klayers-p39-requests:19",
         )
-

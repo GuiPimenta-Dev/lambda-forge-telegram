@@ -35,7 +35,7 @@ class AWSLambda(IAWSLambda):
             layers=layers + [self.layers.telegram_layer, self.layers.requests_layer],
             timeout=Duration.minutes(timeout),
         )
-        
+
         self.secrets_manager.telegram_secret.grant_read(function)
 
         return function

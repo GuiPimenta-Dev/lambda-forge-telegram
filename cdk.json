@@ -57,6 +57,14 @@
         "prod": {
             "arns": {}
         },
-        "functions": []
+        "functions": [
+            {
+                "name": "Bot",
+                "path": "./functions/bot",
+                "description": "Telegram webhook",
+                "method": "POST",
+                "endpoint": "/bot"
+            }
+        ]
     }
 }

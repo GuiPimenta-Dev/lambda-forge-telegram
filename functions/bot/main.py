@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import telegram
 
+
 @dataclass
 class Input:
     pass
@@ -14,3 +15,5 @@ class Output:
 def lambda_handler(event, context):
     chat_id, text = telegram.get_chat_id(event), telegram.get_text(event)
     telegram.send_message(chat_id, text)
+
+    return {"statusCode": 200}
