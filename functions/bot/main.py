@@ -1,9 +1,10 @@
-import json
 from dataclasses import dataclass
+import telegram
 
 @dataclass
 class Input:
     pass
+
 
 @dataclass
 class Output:
@@ -11,8 +12,5 @@ class Output:
 
 
 def lambda_handler(event, context):
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps({"message": "Hello World!"})
-    }
+    chat_id, text = telegram.get_chat_id(event), telegram.get_text(event)
+    telegram.send_message(chat_id, text)
