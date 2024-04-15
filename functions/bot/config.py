@@ -13,6 +13,6 @@ class BotConfig:
         services.api_gateway.create_endpoint("POST", "/bot", function, public=True)
 
         stm = services.state_machine
-        task = stm.create_task("Bot", function)
+        task = stm.create_task("StartTask", function)
         definition = stm.success(task)
-        stm.create_state_machine("Bot", definition)
+        stm.create_state_machine("Bot-STM", definition)
