@@ -38,13 +38,10 @@ class BotConfig:
             "CommandChoice", [
                 (stm.string_equals("$.command", "/start"), task1),
                 (stm.string_equals("$.command", "/test"), task2)
-            ]
+            ],
+            retry_on_erros=[]
         )
-
-        # Optionally add success and fail states
-        success = stm.add_success("ProcessComplete")
-        fail = stm.add_fail("InvalidCommand", "Invalid Command")
-
+        
         # Finalize and build the state machine
         state_machine = stm.finalize_and_build("MyStateMachine", choice)
 
