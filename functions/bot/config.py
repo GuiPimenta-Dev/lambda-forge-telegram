@@ -13,7 +13,7 @@ class BotConfig:
             description="Telegram webhook",
         )
 
-        services.api_gateway.create_endpoint("POST", "/bot", bot_function, public=True)
+        services.api_gateway.create_endpoint("POST", "/secondbot", bot_function, public=True)
 
         start_function = services.aws_lambda.create_function(
             name="StartCommand",
