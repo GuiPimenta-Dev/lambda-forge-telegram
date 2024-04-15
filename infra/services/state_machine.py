@@ -21,19 +21,16 @@ class StateMachine:
             retry_on_service_exceptions=False,
             
         )
-        self.tasks.append(task)
         return task
 
     def add_choice(self, name, choices):
         choice_state = sfn.Choice(self.scope, name)
         for condition, next_state in choices:
             choice_state.when(condition, next_state)
-        self.choice_states.append(choice_state)
         return choice_state
 
     def add_success(self, name="Success"):
         success_state = sfn.Succeed(self.scope, name)
-        self.success_states.append(success_state)
         return success_state
 
     def add_fail(self, name="Fail", cause="Unknown Error"):
@@ -48,7 +45,6 @@ class StateMachine:
             name,
             state_machine_name=name,
             definition=starting_state,
-                        
         )
 
     @staticmethod

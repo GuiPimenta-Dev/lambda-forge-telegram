@@ -42,7 +42,7 @@ class BotConfig:
         )
         
         # Finalize and build the state machine
-        state_machine = stm.finalize_and_build("MyStateMachine", choice)
+        state_machine = stm.finalize_and_build("TelegramBotStateMachine", choice)
 
         state_machine.grant_start_execution(bot_function)
         

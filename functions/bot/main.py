@@ -17,4 +17,5 @@ def lambda_handler(event, context):
             "command": text
         })
     )
-    return {"statusCode": 200, "chat_id": chat_id, "text": text, "command": text}
+    return {"statusCode": 200, "chat_id": 6180995571, "text": text, "command": text}
+
