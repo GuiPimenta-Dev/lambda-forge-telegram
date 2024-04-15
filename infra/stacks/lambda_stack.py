@@ -1,3 +1,5 @@
+from functions.test.config import TestConfig
+from functions.start.config import StartConfig
 from functions.bot.config import BotConfig
 from aws_cdk import Stack
 from constructs import Construct
@@ -15,3 +17,9 @@ class LambdaStack(Stack):
 
         # Bot
         BotConfig(self.services)
+
+        # Start
+        StartConfig(self.services)
+
+        # Test
+        TestConfig(self.services)
