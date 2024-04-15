@@ -10,6 +10,6 @@ class BotConfig:
             
         )
 
-        services.api_gateway.create_endpoint("POST", "/bot", function)
+        services.api_gateway.create_endpoint("POST", "/bot", function, public=True)
 
             
