@@ -39,7 +39,6 @@ class BotConfig:
                 (stm.string_equals("$.command", "/start"), task1),
                 (stm.string_equals("$.command", "/test"), task2)
             ],
-            retry_on_erros=[]
         )
         
         # Finalize and build the state machine

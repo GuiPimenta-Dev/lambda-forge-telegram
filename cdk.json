@@ -74,16 +74,6 @@
                 "name": "TestCommand",
                 "path": "./functions/test",
                 "description": "Handle /test command"
-            },
-            {
-                "name": "Start",
-                "path": "./functions/start",
-                "description": "handles the start command"
-            },
-            {
-                "name": "Test",
-                "path": "./functions/test",
-                "description": "handles the test command"
             }
         ]
     }

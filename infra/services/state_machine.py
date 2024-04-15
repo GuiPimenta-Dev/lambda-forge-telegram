@@ -17,7 +17,9 @@ class StateMachine:
             self.scope, 
             task_name, 
             lambda_function=function, 
-            output_path="$.Payload"
+            output_path="$.Payload",
+            retry_on_service_exceptions=False,
+            
         )
         self.tasks.append(task)
         return task
@@ -46,6 +48,7 @@ class StateMachine:
             name,
             state_machine_name=name,
             definition=starting_state,
+                        
         )
 
     @staticmethod
