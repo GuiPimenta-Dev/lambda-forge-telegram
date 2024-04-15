@@ -17,9 +17,3 @@ class LambdaStack(Stack):
 
         # Bot
         BotConfig(self.services)
-
-        # Start
-        StartConfig(self.services)
-
-        # Test
-        TestConfig(self.services)

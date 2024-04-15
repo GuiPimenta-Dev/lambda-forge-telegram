@@ -12,7 +12,7 @@ class StateMachine:
         self.fail_states = []
 
     def create_task(self, task_name, function):
-        task_name = f"{self.context.stage}-{self.context.name}-{task_name.replace(' ', '')}"
+        task_name = f"{self.context.stage}-{self.context.name}-{task_name}"
         task = tasks.LambdaInvoke(
             self.scope, 
             task_name, 
