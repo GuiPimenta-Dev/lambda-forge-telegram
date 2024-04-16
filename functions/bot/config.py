@@ -13,6 +13,6 @@ class BotConfig:
             description="Telegram webhook",
         )
 
-        services.api_gateway.create_endpoint("POST", "/secondbot", bot_function, public=True)
+        services.api_gateway.create_endpoint("POST", "/mybot", bot_function, public=True)
 
        

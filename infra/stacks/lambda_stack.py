@@ -1,3 +1,4 @@
+from functions.crawler.config import CrawlerConfig
 from functions.test.config import TestConfig
 from functions.start.config import StartConfig
 from functions.bot.config import BotConfig
@@ -17,3 +18,6 @@ class LambdaStack(Stack):
 
         # Bot
         BotConfig(self.services)
+
+        # Crawler
+        CrawlerConfig(self.services)
