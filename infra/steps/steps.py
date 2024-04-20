@@ -64,7 +64,7 @@ class Steps:
 
         return self.codebuild.create_step(
             name="LS",
-            commands=["cdk synth", "ls -la"],
+            commands=["cdk synth", "ls -la", "pwd", "ls -la ../"],
         )
 
     def validate_integration_tests(self):
