@@ -26,6 +26,7 @@ class CodeBuild:
             name,
             input=self.source,
             install_commands=[
+                "cp -r /lambdaforge/* .",
                 "forge layer --install",
                 f"echo {PUBLIC_ECR}",
                 f"pip install -r {requirements}",
