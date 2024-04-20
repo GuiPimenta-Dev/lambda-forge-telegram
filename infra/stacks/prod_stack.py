@@ -6,7 +6,6 @@ from constructs import Construct
 from infra.stages.deploy import DeployStage
 from lambda_forge import context, create_context, Steps
 
-
 @context(
     stage="Prod",
     resources="prod",
@@ -53,6 +52,7 @@ class ProdStack(cdk.Stack):
                 unit_tests,
                 coverage,
                 validate_integration_tests,
+                validate_docs
             ],
             post=[integration_tests],
         )
@@ -62,5 +62,5 @@ class ProdStack(cdk.Stack):
 
         pipeline.add_stage(
             DeployStage(self, context),
-            post=[],
+            post=[generate_docs],
         )

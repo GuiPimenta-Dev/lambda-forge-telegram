@@ -5,11 +5,10 @@ from lambda_forge.interfaces import IAWSLambda
 
 
 class AWSLambda(IAWSLambda):
-    def __init__(self, scope, context, layers, secrets_manager) -> None:
+    def __init__(self, scope, context) -> None:
         self.scope = scope
         self.context = context
-        self.layers = layers
-        self.secrets_manager = secrets_manager
+        self.functions = {}
 
     @track
     def create_function(
@@ -32,10 +31,9 @@ class AWSLambda(IAWSLambda):
             handler=Path.handler(directory),
             environment=environment,
             code=Code.from_asset(path=Path.function(path)),
-            layers=layers + [self.layers.telegram_layer, self.layers.requests_layer],
+            layers=layers,
             timeout=Duration.minutes(timeout),
         )
 
-        self.secrets_manager.telegram_secret.grant_read(function)
-
+        self.functions[name] = function
         return function

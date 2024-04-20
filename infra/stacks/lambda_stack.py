@@ -1,7 +1,4 @@
-from functions.crawler.config import CrawlerConfig
-from functions.test.config import TestConfig
-from functions.start.config import StartConfig
-from functions.bot.config import BotConfig
+from docs.config import DocsConfig
 from aws_cdk import Stack
 from constructs import Construct
 from infra.services import Services
@@ -16,8 +13,5 @@ class LambdaStack(Stack):
 
         self.services = Services(self, context)
 
-        # Bot
-        BotConfig(self.services)
-
-        # Crawler
-        CrawlerConfig(self.services)
+        # Docs
+        DocsConfig(self.services)
