@@ -12,7 +12,7 @@ class Steps:
                     "s3:PutObject",
                     "s3:PutObjectAcl",
                 ],
-                "resources": ["*"],
+                "resources": [f"arn:aws:s3:::{context.bucket}/{context.name}/{context.stage.lower()}/*"],
             }
         ]
 
@@ -59,24 +59,12 @@ class Steps:
             commands=["cdk synth", "python validate_docs.py"],
         )
 
-    def ls(self):
-
-        return self.codebuild.create_step(
-            name="LS",
-            commands=["cdk synth", "ls -la", "pwd", "ls -la ../"],
-        )
-
     def validate_integration_tests(self):
-        conftest = """import json 
-def pytest_generate_tests(metafunc):
-    for mark in metafunc.definition.iter_markers(name="integration"):
-        with open("tested_endpoints.txt", "a") as f:
-            f.write(f"{json.dumps(mark.kwargs)}|")"""
 
         commands = [
             "cdk synth",
             "rm -rf cdk.out",
-            f"echo '{conftest}' > conftest.py",
+            f"echo 'from additional_fixtures import *' >> conftest.py",
             "pytest -m integration --collect-only . -q",
             "python validate_integration_tests.py",
         ]
